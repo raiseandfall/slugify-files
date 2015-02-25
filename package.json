@@ -4,7 +4,7 @@
   "description": "A simple CL tool to sanitize filenames.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -15,14 +15,18 @@
     "filenames",
     "clean"
   ],
-  "author": "Matthieu COLLE",
+  "author": {
+    "name": "Matthieu COLLE",
+    "url": "https://github.com/raiseandfall"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/raiseandfall/sanitize-filenames/issues"
   },
   "homepage": "https://github.com/raiseandfall/sanitize-filenames",
   "devDependencies": {
-    "gulp": "^3.8.11",
+    "mocha": "*",
+    "gulp": "*",
     "gulp-util": "^3.0.3",
     "gulp-mocha": "^2.0.0",
     "gulp-jshint": "^1.9.2",
