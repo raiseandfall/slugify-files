@@ -1,3 +1,5 @@
-/**
- * Created by raiseandfall on 2/23/15.
- */
+'use strict';
+
+module.exports = function() {
+
+};
