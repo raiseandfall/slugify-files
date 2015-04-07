@@ -1,5 +1,9 @@
 'use strict';
 
-module.exports = function() {
+module.exports = function (src) {
+
+  if (!(Array.isArray(src))) {
+
+  }
 
 };

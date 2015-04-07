@@ -1,24 +1,42 @@
 # sanitize-filenames [![Build Status](https://travis-ci.org/raiseandfall/sanitize-filenames.svg)](https://travis-ci.org/raiseandfall/sanitize-filenames)
-A simple CL tool to sanitize filenames.
+
+> A simple CL tool to sanitize filenames.
+
 
 ## INSTALL
+
+<!--
+```shell
+$ npm install --save sanitize-filenames
+```
+-->
+
+## USAGE
+
+```shell
+var snt = require('sanitize-filenames');
+
+snt(['assets/*.png'], function (err) {
+    console.log('files renamed');
+});
+```
+
+## CONTRIBUTE
 
 ```shell
 $ git clone git@github.com:raiseandfall/sanitize-filenames.git && cd sanitize-filenames
 ```
 
 ```shell
-$ npm install
+$ npm i
 ```
 
 Run
 ```shell
-$ gulp
+$ npm run dev
 ```
 
 Run tests
 ```shell
-$ gulp mocha
+$ npm run test
 ```
-
-## CONTRIBUTE
