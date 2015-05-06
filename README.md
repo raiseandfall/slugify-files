@@ -1,22 +1,20 @@
-# sanitize-filenames [![Build Status](https://travis-ci.org/raiseandfall/sanitize-filenames.svg)](https://travis-ci.org/raiseandfall/sanitize-filenames)
+# slugify-files v0.1 [![Build Status](https://travis-ci.org/raiseandfall/slugify-files.svg)](https://travis-ci.org/raiseandfall/slugify-files)
 
-> A simple CL tool to sanitize filenames
+> A simple CL tool to slugify files
 
 
 ## INSTALL
 
-<!--
 ```shell
-$ npm install --save sanitize-filenames
+$ npm install --save slugify-files
 ```
--->
 
 ## USAGE
 
-```shell
-var snt = require('sanitize-filenames');
+```javascript
+var slugify = require('slugify-files');
 
-snt(['assets/*.png'], function (err) {
+snt(['*.png'], function (err) {
     console.log('files renamed');
 });
 ```
@@ -24,7 +22,7 @@ snt(['assets/*.png'], function (err) {
 ## CONTRIBUTE
 
 ```shell
-$ git clone git@github.com:raiseandfall/sanitize-filenames.git && cd sanitize-filenames
+$ git clone git@github.com:raiseandfall/slugify-files.git && cd slugify-files
 ```
 
 ```shell

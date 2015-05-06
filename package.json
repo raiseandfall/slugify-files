@@ -6,8 +6,8 @@
   "scripts": {
     "hint": "jshint --reporter node_modules/jshint-stylish/stylish.js index.js",
     "dev": "npm run watch",
-    "watch": "watchify *.js -o 'npm run hint && test'",
     "test": "mocha tests.js",
+    "watch": "watchify *.js -o 'npm run hint && npm run test'",
     "build:js": "npm run hint"
   },
   "repository": {
@@ -29,9 +29,17 @@
   },
   "homepage": "https://github.com/raiseandfall/sanitize-filenames",
   "devDependencies": {
+    "fs-extra": "^0.18.2",
     "jshint": "^2.6.3",
     "jshint-stylish": "^1.0.1",
     "mocha": "*",
+    "path-exists": "^1.0.0",
     "watchify": "^3.1.0"
+  },
+  "dependencies": {
+    "each-async": "^1.1.1",
+    "globby": "^2.0.0",
+    "object-assign": "^2.0.0",
+    "slug": "^0.9.1"
   }
 }
