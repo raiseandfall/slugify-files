@@ -1,7 +1,7 @@
 {
-  "name": "sanitize-filenames",
-  "version": "0.1.0",
-  "description": "A simple CL tool to sanitize filenames.",
+  "name": "slugify-files",
+  "version": "0.1",
+  "description": "A simple CL tool to slugify files.",
   "main": "index.js",
   "scripts": {
     "hint": "jshint --reporter node_modules/jshint-stylish/stylish.js index.js",
@@ -16,6 +16,7 @@
   },
   "keywords": [
     "sanitize",
+    "slugify",
     "filenames",
     "clean"
   ],
