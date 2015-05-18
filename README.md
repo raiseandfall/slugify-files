@@ -2,11 +2,13 @@
 
 > A simple CL tool to slugify files
 
+> ```"this Filename NEEDS cleaning.png" -> "this-filename-needs-cleaning.png"```
+
 
 ## INSTALL
 
 ```shell
-$ npm install --save slugify-files
+$ npm install slugify-files
 ```
 
 ## USAGE
