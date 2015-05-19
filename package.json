@@ -13,14 +13,30 @@
     "type": "git",
     "url": "git://github.com/raiseandfall/slugify-files.git"
   },
+  "engines": {
+    "node": ">=0.10.0"
+  },
   "bin": {
     "slugify": "cli.js"
   },
+  "files": [
+    "index.js",
+    "cli.js"
+  ],
   "keywords": [
+    "file-system",
     "sanitize",
     "slugify",
     "filenames",
-    "clean"
+    "clean",
+    "rename",
+    "files",
+    "fs",
+    "cli",
+    "bin",
+    "file",
+    "glob",
+    "urlify"
   ],
   "author": {
     "name": "Matthieu COLLE",
