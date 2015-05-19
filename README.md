@@ -16,9 +16,27 @@ $ npm install slugify-files
 ```javascript
 var slugify = require('slugify-files');
 
-snt(['*.png'], function (err) {
+slugify(['*.png'], function (err) {
     console.log('files renamed');
 });
+```
+
+## CLI
+
+```shell
+$ npm install --global slugify-files
+```
+
+```
+$ slugify --help
+
+  Usage
+    $ slugify <source>
+
+  Example
+    $ slugify '*.tmp'
+
+  <source> can contain globs if quoted
 ```
 
 ## CONTRIBUTE

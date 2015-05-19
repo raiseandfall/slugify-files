@@ -3,7 +3,7 @@
 var assert = require('assert'),
   fs = require('fs-extra'),
   pathExists = require('path-exists'),
-  sanitize = require('./');
+  slugify = require('./');
 
 var mock = [
   'file with spaces.tmp',
@@ -30,7 +30,7 @@ afterEach(function () {
 });
 
 it('should rename files', function() {
-  sanitize(['*.tmp'], function(err) {
+  slugify(['*.tmp'], function(err) {
     assert(!err, err);
 
     mock.forEach(function(file){

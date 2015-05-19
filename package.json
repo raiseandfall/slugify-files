@@ -2,7 +2,6 @@
   "name": "slugify-files",
   "version": "0.1.1",
   "description": "A simple CL tool to slugify files.",
-  "main": "index.js",
   "scripts": {
     "hint": "jshint --reporter node_modules/jshint-stylish/stylish.js index.js",
     "dev": "npm run watch",
@@ -13,6 +12,9 @@
   "repository": {
     "type": "git",
     "url": "git://github.com/raiseandfall/slugify-files.git"
+  },
+  "bin": {
+    "slugify": "cli.js"
   },
   "keywords": [
     "sanitize",
@@ -40,6 +42,7 @@
   "dependencies": {
     "each-async": "^1.1.1",
     "globby": "^2.0.0",
+    "meow": "^3.1.0",
     "object-assign": "^2.0.0",
     "slug": "^0.9.1"
   }
