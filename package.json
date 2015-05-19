@@ -1,6 +1,6 @@
 {
   "name": "slugify-files",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A simple CL tool to slugify files.",
   "scripts": {
     "hint": "jshint --reporter node_modules/jshint-stylish/stylish.js index.js",
