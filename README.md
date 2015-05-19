@@ -1,12 +1,14 @@
-# slugify-files v0.1 [![Build Status](https://travis-ci.org/raiseandfall/slugify-files.svg)](https://travis-ci.org/raiseandfall/slugify-files)
+# slugify-files v0.1.1 [![Build Status](https://travis-ci.org/raiseandfall/slugify-files.svg)](https://travis-ci.org/raiseandfall/slugify-files)
 
 > A simple CL tool to slugify files
+
+> ```"this Filename NEEDS cleaning.png" -> "this-filename-needs-cleaning.png"```
 
 
 ## INSTALL
 
 ```shell
-$ npm install --save slugify-files
+$ npm install slugify-files
 ```
 
 ## USAGE

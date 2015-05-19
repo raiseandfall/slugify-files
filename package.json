@@ -1,6 +1,6 @@
 {
   "name": "slugify-files",
-  "version": "0.1",
+  "version": "0.1.1",
   "description": "A simple CL tool to slugify files.",
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/raiseandfall/sanitize-filenames.git"
+    "url": "git://github.com/raiseandfall/slugify-files.git"
   },
   "keywords": [
     "sanitize",
@@ -26,9 +26,9 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/raiseandfall/sanitize-filenames/issues"
+    "url": "https://github.com/raiseandfall/slugify-files/issues"
   },
-  "homepage": "https://github.com/raiseandfall/sanitize-filenames",
+  "homepage": "https://github.com/raiseandfall/slugify-files",
   "devDependencies": {
     "fs-extra": "^0.18.2",
     "jshint": "^2.6.3",
