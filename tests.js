@@ -5,40 +5,79 @@ var assert = require('assert'),
   pathExists = require('path-exists'),
   slugify = require('./');
 
-var mock = [
+var mockSameLevel = [
   'file with spaces.tmp',
   'fileWithCamelCase.tmp',
   'filèwithàccénts.tmp',
   'filewithpunctuation!?.tmp'
 ];
-
-var mockSlugged = [
+var mockSluggedSameLevel = [
   'file-with-spaces.tmp',
   'filewithcamelcase.tmp',
   'filewithaccents.tmp',
   'filewithpunctuation.tmp'
 ];
 
-beforeEach(function () {
-  mock.forEach(fs.ensureFileSync);
+var mockDifferentLevel = [
+  'tmp/tmp2/tmp3/file with spaces.tmp',
+  'tmp/tmp2/tmp3/fileWithCamelCase.tmp',
+  'tmp/tmp2/tmp3/filèwithàccénts.tmp',
+  'tmp/tmp2/tmp3/filewithpunctuation!?.tmp'
+];
+var mockSluggedDifferentLevel = [
+  'tmp/tmp2/tmp3/file-with-spaces.tmp',
+  'tmp/tmp2/tmp3/filewithcamelcase.tmp',
+  'tmp/tmp2/tmp3/filewithaccents.tmp',
+  'tmp/tmp2/tmp3/filewithpunctuation.tmp'
+];
+
+before(function() {
+  // Same level
+  mockSameLevel.forEach(fs.ensureFileSync);
+  // Other level
+  mockDifferentLevel.forEach(fs.ensureFileSync);
 });
 
-afterEach(function () {
-  mockSlugged.forEach(function(el) {
-    fs.remove(el);
+after(function () {
+  mockSluggedSameLevel.forEach(function(el) {
+    fs.deleteSync(el, function(err) {
+      if (err) return console.error(err);
+    });
   });
+  mockSluggedDifferentLevel.forEach(function(el) {
+    fs.deleteSync(el, function(err) {
+      if (err) return console.error(err);
+    });
+  });
+
+  fs.deleteSync('tmp');
 });
 
-it('should rename files', function() {
+it('should rename files on same level', function() {
   slugify(['*.tmp'], function(err) {
     assert(!err, err);
 
-    mock.forEach(function(file){
+    mockSameLevel.forEach(function(file){
       assert(!pathExists.sync(file));
     });
 
-    for (var i in mockSlugged) {
-      assert(pathExists.sync(mockSlugged[i]));
+    for (var i in mockSluggedSameLevel) {
+      assert(pathExists.sync(mockSluggedSameLevel[i]));
     }
   });
 });
+
+it('should rename files on other level', function() {
+  slugify(['tmp/tmp2/tmp3/*.tmp'], function(err) {
+    assert(!err, err);
+
+    mockDifferentLevel.forEach(function(file){
+      assert(!pathExists.sync(file));
+    });
+
+    for (var i in mockSluggedDifferentLevel) {
+      assert(pathExists.sync(mockSluggedDifferentLevel[i]));
+    }
+  });
+});
+
