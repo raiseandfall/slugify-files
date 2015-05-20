@@ -1,4 +1,4 @@
-# slugify-files v0.2.1 [![Build Status](https://travis-ci.org/raiseandfall/slugify-files.svg)](https://travis-ci.org/raiseandfall/slugify-files)
+# slugify-files [![Build Status](https://travis-ci.org/raiseandfall/slugify-files.svg)](https://travis-ci.org/raiseandfall/slugify-files)
 
 > A simple CL tool to slugify files
 
