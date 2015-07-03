@@ -26,8 +26,12 @@ module.exports = function (patterns, opts, cb) {
 
     eachAsync(files, function(el, i, next) {
 
+      // Path
+      var path = el.split('/'),
+        dirs = path.slice(0, path.length - 1);
+
       // Get extension
-      var file = el.split('.'),
+      var file = path[path.length-1].split('.'),
         ext = '',
         old = '',
         filename = '';
@@ -45,9 +49,12 @@ module.exports = function (patterns, opts, cb) {
       var slugged = slug(old, {
         lower: true
       });
-      slugged += '.'+ext;
+      slugged += '.' + ext;
 
-      fs.rename(el, slugged, function(err) {
+      dirs.push(slugged);
+      var fullSlugged = dirs.join('/');
+
+      fs.rename(el, fullSlugged, function(err) {
         if (err) {
           cb(err);
           next();
