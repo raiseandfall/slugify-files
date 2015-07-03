@@ -1,6 +1,6 @@
 # slugify-files [![Build Status](https://travis-ci.org/raiseandfall/slugify-files.svg)](https://travis-ci.org/raiseandfall/slugify-files)
 
-> A simple CL tool to slugify files
+> A simple CL tool to slugify files (kebab-case)
 
 > ```"this Filename NEEDS cleaning.png" -> "this-filename-needs-cleaning.png"```
 
