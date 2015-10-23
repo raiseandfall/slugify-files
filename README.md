@@ -58,3 +58,6 @@ Run tests
 ```shell
 $ npm run test
 ```
+
+## LICENSE
+MIT
