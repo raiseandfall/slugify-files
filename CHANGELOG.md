@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 1.0.1
+- [DOC] Updated README for correct rendering on NPM page
+
 ## 1.0.0
 - [TEST] Added travisCI support for nodeJS 4.0 & 4.2
 - [DOC] Bumped version number to follow SemVer
