@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 1.0.2
+- [TEST] Added node 5.0 & 5.5 on travis config
+
 ## 1.0.1
 - [DOC] Updated README for correct rendering on NPM page
 

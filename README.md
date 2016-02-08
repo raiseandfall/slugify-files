@@ -6,6 +6,7 @@
 
 > ```"this Filename NEEDS cleaning.png" -> "this-filename-needs-cleaning.png"```
 
+## [CHANGELOG](./CHANGELOG.md)
 
 ## INSTALL
 
