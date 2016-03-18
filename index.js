@@ -15,6 +15,7 @@ module.exports = function (patterns, opts, cb) {
 
   opts = objectAssign({}, opts);
   cb = cb || function () {};
+  var sluggedFiles = [];
 
   globby(patterns, opts, function (err, files) {
 
@@ -59,15 +60,22 @@ module.exports = function (patterns, opts, cb) {
           cb(err);
           next();
         }
+
+        sluggedFiles.push({
+          new: fullSlugged,
+          old: el
+        });
+
+        next();
       });
 
     }, function(err) {
       if (err) {
-        cb(err);
+        cb(err, null);
         return;
       }
 
-      cb();
+      cb(null, sluggedFiles);
     });
 
   });

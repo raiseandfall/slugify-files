@@ -54,6 +54,7 @@
     "jshint-stylish": "^1.0.1",
     "mocha": "*",
     "path-exists": "^1.0.0",
+    "unorm": "^1.4.1",
     "watchify": "^3.1.0"
   },
   "dependencies": {

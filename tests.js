@@ -3,7 +3,9 @@
 var assert = require('assert'),
   fs = require('fs-extra'),
   pathExists = require('path-exists'),
-  slugify = require('./');
+  slugify = require('./'),
+  path = require('path'),
+  unorm = require('unorm');
 
 var mockSameLevel = [
   'file with spaces.tmp',
@@ -31,14 +33,14 @@ var mockSluggedDifferentLevel = [
   'tmp/tmp2/tmp3/filewithpunctuation.tmp'
 ];
 
-before(function() {
+beforeEach(function() {
   // Same level
   mockSameLevel.forEach(fs.ensureFileSync);
   // Other level
   mockDifferentLevel.forEach(fs.ensureFileSync);
 });
 
-after(function () {
+afterEach(function () {
   mockSluggedSameLevel.forEach(function(el) {
     fs.deleteSync(el, function(err) {
       if (err) return console.error(err);
@@ -53,31 +55,61 @@ after(function () {
   fs.deleteSync('tmp');
 });
 
-it('should rename files on same level', function() {
+function fileExistsCaseSensitive(filePath) {
+  var dir = path.dirname(filePath);
+  var filenames = fs.readdirSync(dir);
+  if (filenames.indexOf(path.basename(filePath)) === - 1) {
+    return false;
+  }
+  return fileExistsCaseSensitive(dir);
+}
+
+it('should rename files on same level', function(done) {
   slugify(['*.tmp'], function(err) {
     assert(!err, err);
 
     mockSameLevel.forEach(function(file){
-      assert(!pathExists.sync(file));
+      assert(!fileExistsCaseSensitive(file));
     });
 
     for (var i in mockSluggedSameLevel) {
       assert(pathExists.sync(mockSluggedSameLevel[i]));
     }
+
+    done();
   });
 });
-
-it('should rename files on other level', function() {
+it('should rename files on other level', function(done) {
   slugify(['tmp/tmp2/tmp3/*.tmp'], function(err) {
     assert(!err, err);
 
     mockDifferentLevel.forEach(function(file){
-      assert(!pathExists.sync(file));
+      assert(!fileExistsCaseSensitive(file));
     });
 
     for (var i in mockSluggedDifferentLevel) {
       assert(pathExists.sync(mockSluggedDifferentLevel[i]));
     }
+
+    done();
   });
 });
 
+it('should return the slugged files in an object', function(done) {
+  var mapMockObj = {};
+  mockSameLevel.forEach(function(file, idx) {
+    mapMockObj[mockSluggedSameLevel[idx]] = file;
+  });
+
+  slugify(['*.tmp'], function(err, sluggedFiles) {
+    for (var mockFile in mapMockObj) {
+      var isEqual = sluggedFiles.find(function(file) {
+        return file.new === mockFile;
+      });
+
+      assert.equal(unorm.nfkd(isEqual.old), unorm.nfkd(mapMockObj[mockFile]));
+    }
+
+    done();
+  });
+});

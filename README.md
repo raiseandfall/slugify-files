@@ -18,8 +18,10 @@ $ npm install slugify-files
 ```javascript
 var slugify = require('slugify-files');
 
-slugify(['*.png'], function (err) {
-    console.log('files renamed');
+slugify(['*.png'], function (err, sluggedFiles) {
+  sluggedFiles.forEach(function(file, idx)) {
+    console.log(file.old, 'renamed to', file.new);
+  }
 });
 ```
 
@@ -40,6 +42,15 @@ $ slugify --help
 
   <source> can contain globs if quoted
 ```
+
+## API
+
+```javascript
+slugify(source, function(err, sluggedFiles){});
+```
+- ```source```: glob  
+- ```err```: error  
+- ```sluggedFiles```: Array of slugged files objects. Each has two keys: ```old``` and ```new```
 
 ## CONTRIBUTE
 
