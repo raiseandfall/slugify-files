@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.0.1
+- [FIX] Fixed Array.prototype.find bug on 0.10 & 0.12
+- [FIX] Fixed tests by using forEach instead of for in
+
 ## 2.0.0
 - [TEST] Added sluggedFiles as second parameter of callback function
 - [FIX] Fixed global issue on test not running correctly

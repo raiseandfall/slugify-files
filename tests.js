@@ -55,6 +55,22 @@ afterEach(function () {
   fs.deleteSync('tmp');
 });
 
+Array.prototype.find = function (predicate, thisValue) {
+  var arr = Object(this);
+  if (typeof predicate !== 'function') {
+    throw new TypeError();
+  }
+  for(var i=0; i < arr.length; i++) {
+    if (i in arr) {  // skip holes
+      var elem = arr[i];
+      if (predicate.call(thisValue, elem, i, arr)) {
+        return elem;  // (1)
+      }
+    }
+  }
+  return undefined;  // (2)
+}
+
 function fileExistsCaseSensitive(filePath) {
   var dir = path.dirname(filePath);
   var filenames = fs.readdirSync(dir);
@@ -72,13 +88,14 @@ it('should rename files on same level', function(done) {
       assert(!fileExistsCaseSensitive(file));
     });
 
-    for (var i in mockSluggedSameLevel) {
-      assert(pathExists.sync(mockSluggedSameLevel[i]));
-    }
+    mockSluggedSameLevel.forEach(function(file) {
+      assert(pathExists.sync(file));
+    });
 
     done();
   });
 });
+
 it('should rename files on other level', function(done) {
   slugify(['tmp/tmp2/tmp3/*.tmp'], function(err) {
     assert(!err, err);
@@ -87,9 +104,9 @@ it('should rename files on other level', function(done) {
       assert(!fileExistsCaseSensitive(file));
     });
 
-    for (var i in mockSluggedDifferentLevel) {
-      assert(pathExists.sync(mockSluggedDifferentLevel[i]));
-    }
+    mockSluggedDifferentLevel.forEach(function(file) {
+      assert(pathExists.sync(file));
+    });
 
     done();
   });
