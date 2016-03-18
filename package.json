@@ -1,6 +1,7 @@
 {
   "name": "slugify-files",
   "version": "2.0.0",
+  "version": "1.0.3",
   "description": "A simple CL tool to slugify files (kebab-case).",
   "scripts": {
     "hint": "jshint --reporter node_modules/jshint-stylish/stylish.js index.js",

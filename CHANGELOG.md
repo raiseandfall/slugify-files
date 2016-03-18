@@ -5,6 +5,9 @@
 - [FIX] Fixed global issue on test not running correctly
 - [TEST] Added nodeJS 5 for travisCI
 
+## 1.0.3
+- [TEST] Added node 5 on travis config
+
 ## 1.0.1
 - [DOC] Updated README for correct rendering on NPM page
 
