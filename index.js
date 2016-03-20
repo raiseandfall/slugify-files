@@ -1,13 +1,12 @@
 'use strict';
 
-var globby = require('globby'),
-  fs = require('fs'),
-  eachAsync = require('each-async'),
-  slug = require('slug'),
-  objectAssign = require('object-assign');
+var globby = require('globby');
+var fs = require('fs');
+var eachAsync = require('each-async');
+var slug = require('slug');
+var objectAssign = require('object-assign');
 
 module.exports = function (patterns, opts, cb) {
-
   if (typeof opts !== 'object') {
     cb = opts;
     opts = {};
@@ -18,24 +17,22 @@ module.exports = function (patterns, opts, cb) {
   var sluggedFiles = [];
 
   globby(patterns, opts, function (err, files) {
-
     // Error
     if (err) {
       cb(err);
       return;
     }
 
-    eachAsync(files, function(el, i, next) {
-
+    eachAsync(files, function (el, i, next) {
       // Path
-      var path = el.split('/'),
-        dirs = path.slice(0, path.length - 1);
+      var path = el.split('/');
+      var dirs = path.slice(0, path.length - 1);
 
       // Get extension
-      var file = path[path.length-1].split('.'),
-        ext = '',
-        old = '',
-        filename = '';
+      var file = path[path.length - 1].split('.');
+      var ext = '';
+      var old = '';
+      var filename = '';
 
       // If extension
       if (file.length > 1) {
@@ -55,7 +52,7 @@ module.exports = function (patterns, opts, cb) {
       dirs.push(slugged);
       var fullSlugged = dirs.join('/');
 
-      fs.rename(el, fullSlugged, function(err) {
+      fs.rename(el, fullSlugged, function (err) {
         if (err) {
           cb(err);
           next();
@@ -68,8 +65,7 @@ module.exports = function (patterns, opts, cb) {
 
         next();
       });
-
-    }, function(err) {
+    }, function (err) {
       if (err) {
         cb(err, null);
         return;
@@ -77,7 +73,5 @@ module.exports = function (patterns, opts, cb) {
 
       cb(null, sluggedFiles);
     });
-
   });
-
 };

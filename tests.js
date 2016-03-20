@@ -1,6 +1,6 @@
 'use strict';
 
-var assert = require('assert'),
+var test = require('tapes'),
   fs = require('fs-extra'),
   pathExists = require('path-exists'),
   slugify = require('./'),
@@ -33,42 +33,20 @@ var mockSluggedDifferentLevel = [
   'tmp/tmp2/tmp3/filewithpunctuation.tmp'
 ];
 
-beforeEach(function() {
-  // Same level
-  mockSameLevel.forEach(fs.ensureFileSync);
-  // Other level
-  mockDifferentLevel.forEach(fs.ensureFileSync);
-});
-
-afterEach(function () {
-  mockSluggedSameLevel.forEach(function(el) {
-    fs.deleteSync(el, function(err) {
-      if (err) return console.error(err);
-    });
-  });
-  mockSluggedDifferentLevel.forEach(function(el) {
-    fs.deleteSync(el, function(err) {
-      if (err) return console.error(err);
-    });
-  });
-
-  fs.deleteSync('tmp');
-});
-
 Array.prototype.find = function (predicate, thisValue) {
   var arr = Object(this);
   if (typeof predicate !== 'function') {
     throw new TypeError();
   }
   for(var i=0; i < arr.length; i++) {
-    if (i in arr) {  // skip holes
+    if (i in arr) {
       var elem = arr[i];
       if (predicate.call(thisValue, elem, i, arr)) {
-        return elem;  // (1)
+        return elem;
       }
     }
   }
-  return undefined;  // (2)
+  return undefined;
 }
 
 function fileExistsCaseSensitive(filePath) {
@@ -80,53 +58,101 @@ function fileExistsCaseSensitive(filePath) {
   return fileExistsCaseSensitive(dir);
 }
 
-it('should rename files on same level', function(done) {
-  slugify(['*.tmp'], function(err) {
-    assert(!err, err);
+test('Files on same level', function(t) {
 
-    mockSameLevel.forEach(function(file){
-      assert(!fileExistsCaseSensitive(file));
-    });
-
-    mockSluggedSameLevel.forEach(function(file) {
-      assert(pathExists.sync(file));
-    });
-
-    done();
-  });
-});
-
-it('should rename files on other level', function(done) {
-  slugify(['tmp/tmp2/tmp3/*.tmp'], function(err) {
-    assert(!err, err);
-
-    mockDifferentLevel.forEach(function(file){
-      assert(!fileExistsCaseSensitive(file));
-    });
-
-    mockSluggedDifferentLevel.forEach(function(file) {
-      assert(pathExists.sync(file));
-    });
-
-    done();
-  });
-});
-
-it('should return the slugged files in an object', function(done) {
-  var mapMockObj = {};
-  mockSameLevel.forEach(function(file, idx) {
-    mapMockObj[mockSluggedSameLevel[idx]] = file;
+  t.beforeEach(function(t) {
+    mockSameLevel.forEach(fs.ensureFileSync);
+    t.end();
   });
 
-  slugify(['*.tmp'], function(err, sluggedFiles) {
-    for (var mockFile in mapMockObj) {
-      var isEqual = sluggedFiles.find(function(file) {
-        return file.new === mockFile;
+  t.afterEach(function(t) {
+    mockSluggedSameLevel.forEach(function(el) {
+      fs.deleteSync(el, function() {
+        if (err) {
+          return console.error(err);
+        }
+      });
+    });
+    t.end();
+  });
+
+  t.test('should be slugged', function(t) {
+    t.plan(mockSameLevel.length + mockSluggedSameLevel
+           .length + 1);
+
+    slugify(['*.tmp'], function(err) {
+      t.ok(!err);
+
+      mockSameLevel.forEach(function(file){
+        t.ok(!fileExistsCaseSensitive(file));
       });
 
-      assert.equal(unorm.nfkd(isEqual.old), unorm.nfkd(mapMockObj[mockFile]));
-    }
+      mockSluggedSameLevel.forEach(function(file) {
+        t.ok(pathExists.sync(file));
+      });
 
-    done();
+      t.end();
+    });
   });
+
+  t.test('Should return an array with the slugged files', function(t) {
+    t.plan(mockSameLevel.length);
+
+    var mapMockObj = {};
+    mockSameLevel.forEach(function(file, idx) {
+      mapMockObj[mockSluggedSameLevel[idx]] = file;
+    });
+
+    slugify(['*.tmp'], function(err, sluggedFiles) {
+      for (var mockFile in mapMockObj) {
+        var isEqual = sluggedFiles.find(function(file) {
+          return file.new === mockFile;
+        });
+        t.equal(unorm.nfkd(isEqual.old), unorm.nfkd(mapMockObj[mockFile]));
+      }
+
+      t.end();
+    });
+  });
+
+  t.end();
 });
+
+test('Files on different level', function(t) {
+  t.beforeEach(function(t) {
+    mockDifferentLevel.forEach(fs.ensureFileSync);
+    t.end();
+  });
+
+  t.afterEach(function(t) {
+    mockSluggedDifferentLevel.forEach(function(el) {
+      fs.deleteSync(el, function() {
+        if (err) {
+          return console.error(err);
+        }
+      });
+    });
+    t.end();
+  });
+
+  t.test('should be slugged', function(t) {
+    t.plan(mockDifferentLevel.length + mockSluggedDifferentLevel.length + 1);
+
+    slugify(['tmp/tmp2/tmp3/*.tmp'], function(err) {
+      t.ok(!err);
+
+      mockDifferentLevel.forEach(function(file){
+        t.ok(!fileExistsCaseSensitive(file));
+      });
+
+      mockSluggedDifferentLevel.forEach(function(file) {
+        t.ok(pathExists.sync(file));
+      });
+
+      t.end();
+    });
+  });
+
+  t.end();
+});
+

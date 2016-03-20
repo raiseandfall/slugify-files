@@ -3,11 +3,9 @@
   "version": "2.0.1",
   "description": "A simple CL tool to slugify files (kebab-case).",
   "scripts": {
-    "hint": "jshint --reporter node_modules/jshint-stylish/stylish.js index.js",
-    "dev": "npm run watch",
-    "test": "mocha tests.js",
-    "watch": "watchify *.js -o 'npm run hint && npm run test'",
-    "build:js": "npm run hint"
+    "lint": "semistandard index.js",
+    "dev": "nodemon -q -x 'npm test'",
+    "test": "npm run lint && tapes tests.js | faucet"
   },
   "repository": {
     "type": "git",
@@ -49,13 +47,13 @@
   },
   "homepage": "https://github.com/raiseandfall/slugify-files",
   "devDependencies": {
+    "faucet": "0.0.1",
     "fs-extra": "^0.18.2",
-    "jshint": "^2.6.3",
-    "jshint-stylish": "^1.0.1",
-    "mocha": "*",
+    "nodemon": "^1.9.1",
     "path-exists": "^1.0.0",
-    "unorm": "^1.4.1",
-    "watchify": "^3.1.0"
+    "semistandard": "^7.0.5",
+    "tapes": "^3.1.0",
+    "unorm": "^1.4.1"
   },
   "dependencies": {
     "each-async": "^1.1.1",

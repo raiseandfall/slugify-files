@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.0.2
+- [TEST] Tests now written using tape(s)
+
 ## 2.0.1
 - [FIX] Fixed Array.prototype.find bug on 0.10 & 0.12
 - [FIX] Fixed tests by using forEach instead of for in
