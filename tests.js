@@ -9,7 +9,7 @@ var test = require('tapes'),
 
 var mockSameLevel = [
   'file with spaces.tmp',
-  'fileWithCamelCase.tmp',
+  'FileWithCamélCase.tmp',
   'filèwithàccénts.tmp',
   'filewithpunctuation!?.tmp'
 ];
@@ -22,7 +22,7 @@ var mockSluggedSameLevel = [
 
 var mockDifferentLevel = [
   'tmp/tmp2/tmp3/file with spaces.tmp',
-  'tmp/tmp2/tmp3/fileWithCamelCase.tmp',
+  'tmp/tmp2/tmp3/FileWithCamélCase.tmp',
   'tmp/tmp2/tmp3/filèwithàccénts.tmp',
   'tmp/tmp2/tmp3/filewithpunctuation!?.tmp'
 ];
@@ -59,7 +59,6 @@ function fileExistsCaseSensitive(filePath) {
 }
 
 test('Files on same level', function(t) {
-
   t.beforeEach(function(t) {
     mockSameLevel.forEach(fs.ensureFileSync);
     t.end();
