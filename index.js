@@ -6,6 +6,14 @@ var eachAsync = require('each-async');
 var slug = require('slug');
 var objectAssign = require('object-assign');
 
+var UPPER = /([A-Z])/g;
+
+function kebab (input) {
+  return input.replace(UPPER, function (upLetter, _, offset) {
+    return (offset === 0 ? '' : '-') + (upLetter.toLowerCase());
+  });
+}
+
 module.exports = function (patterns, opts, cb) {
   if (typeof opts !== 'object') {
     cb = opts;
@@ -44,7 +52,7 @@ module.exports = function (patterns, opts, cb) {
       }
 
       // Slug it
-      var slugged = slug(old, {
+      var slugged = slug(kebab(old), {
         lower: true
       });
       slugged += '.' + ext;

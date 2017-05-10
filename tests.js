@@ -15,7 +15,7 @@ var mockSameLevel = [
 ];
 var mockSluggedSameLevel = [
   'file-with-spaces.tmp',
-  'filewithcamelcase.tmp',
+  'file-with-camel-case.tmp',
   'filewithaccents.tmp',
   'filewithpunctuation.tmp'
 ];
@@ -28,7 +28,7 @@ var mockDifferentLevel = [
 ];
 var mockSluggedDifferentLevel = [
   'tmp/tmp2/tmp3/file-with-spaces.tmp',
-  'tmp/tmp2/tmp3/filewithcamelcase.tmp',
+  'tmp/tmp2/tmp3/file-with-camel-case.tmp',
   'tmp/tmp2/tmp3/filewithaccents.tmp',
   'tmp/tmp2/tmp3/filewithpunctuation.tmp'
 ];
@@ -154,4 +154,3 @@ test('Files on different level', function(t) {
 
   t.end();
 });
-
