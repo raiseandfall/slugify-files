@@ -1,6 +1,6 @@
 {
   "name": "slugify-files",
-  "version": "2.0.4",
+  "version": "2.1.0",
   "description": "A simple CL tool to slugify files (kebab-case).",
   "scripts": {
     "lint": "semistandard index.js",
