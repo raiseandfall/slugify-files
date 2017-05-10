@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.1.0
+- (feat) pull request
+  [#4](https://github.com/raiseandfall/slugify-files/pull/4): convert CamelCase to kebab-case
+
 ## 2.0.2
 - [TEST] Tests now written using tape(s)
 
