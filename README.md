@@ -1,6 +1,6 @@
 # slugify-files  
 
-[![Build Status](https://travis-ci.org/raiseandfall/slugify-files.svg)](https://travis-ci.org/raiseandfall/slugify-files)
+[![Build Status](https://travis-ci.org/raiseandfall/slugify-files.svg)](https://travis-ci.org/raiseandfall/slugify-files) [![Downloads](https://img.shields.io/npm/dt/slugify-files.svg)](https://www.npmjs.com/package/slugify-files)
 
 > A simple CL tool to slugify files (kebab-case)
 
